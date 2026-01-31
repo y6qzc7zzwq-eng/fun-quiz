@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Мини-тест котика</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест на котика</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Какой ты котик-пирожок сегодня?</h1>
+    <div class="container">
+        <div id="welcome">
+            <h1>Привет! Узнай, какой ты котик 🐱</h1>
+            <button id="startBtn">Начать тест</button>
+        </div>
 
-  <div id="quiz"></div>
+        <div id="quiz" class="hidden">
+            <h2 id="question"></h2>
+            <div id="answers"></div>
+        </div>
 
-  <div id="result" class="hidden">
-    <h2 id="result-name"></h2>
-    <img id="result-img" src="" alt="Ваш котик" style="max-width:300px;">
-    <button id="restart">Пройти ещё раз</button>
-  </div>
+        <div id="result" class="hidden">
+            <h2>Твой котик:</h2>
+            <h3 id="resultName"></h3>
+            <img id="resultImage" src="" alt="Котик">
+            <button id="restartBtn">Пройти ещё раз</button>
+        </div>
+    </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
