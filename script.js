@@ -1,3 +1,4 @@
+// Элементы страницы
 const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
 const welcomeDiv = document.getElementById('welcome');
@@ -8,95 +9,72 @@ const answersEl = document.getElementById('answers');
 const resultNameEl = document.getElementById('resultName');
 const resultImageEl = document.getElementById('resultImage');
 
-// Список котиков
+// Котики с путями к твоим файлам
 const cats = {
-    flowers: { name: "Котик с цветами", img: "images/flowers.jpeg" },
-    newyear: { name: "Новогодний котик", img: "images/newyear.jpeg" },
-    flashlights: { name: "Котик со вспышками", img: "images/flashlights.jpeg" },
-    desktop: { name: "Котик на рабочем столе", img: "images/desktop.jpeg" },
-    coffeemachine: { name: "Котик-бариста", img: "images/coffeemachine.jpeg" },
-    yogamat: { name: "Котик на коврике для йоги", img: "images/yogamat.jpeg" },
-    tiny: { name: "Маленький котик «клопикс»", img: "images/tiny.jpeg" }
+    flowers: { name: "Котик с цветами", img: "./images/desknap.jpeg" },
+    newyear: { name: "Новогодний котик", img: "./images/newyear.jpeg" },
+    flashlights: { name: "Котик со вспышками", img: "./images/flash.jpeg" },
+    desktop: { name: "Котик на рабочем столе", img: "./images/desknap.jpeg" },
+    coffeemachine: { name: "Котик-бариста", img: "./images/barista.jpeg" },
+    yogamat: { name: "Котик на коврике для йоги", img: "./images/barista.jpeg" }, // если йога отдельный файл, поменяй
+    tiny: { name: "Маленький котик «клопикс»", img: "./images/tiny.jpeg" }
 };
 
-// Вопросы
+// Новый набор вопросов: 4 вопроса, 4 варианта каждый
 const questions = [
     {
-        question: "Что тебе больше нравится?",
+        question: "Какой твой идеальный завтрак?",
         answers: [
-            { text: "Цветы 🌸", points: ["flowers"] },
-            { text: "Новый год 🎄", points: ["newyear"] },
-            { text: "Спать на столе 😴", points: ["desktop"] },
-            { text: "Кофе ☕", points: ["coffeemachine"] },
-            { text: "Йога 🧘‍♀️", points: ["yogamat"] },
-            { text: "Маленькие милые вещи 🐾", points: ["tiny"] },
-            { text: "Свет и блеск ✨", points: ["flashlights"] }
+            { text: "Латте и круассан ☕🥐", points: ["coffeemachine"] },
+            { text: "Зелёный смузи и йога 🧘‍♀️", points: ["yogamat"] },
+            { text: "Солнечные цветы на подоконнике 🌸", points: ["flowers"] },
+            { text: "Ничего, хочу ещё поспать 😴", points: ["desktop"] }
         ]
     },
     {
-        question: "Как проводишь свободное время?",
+        question: "Твой любимый стиль в соцсетях?",
         answers: [
-            { text: "Садоводство", points: ["flowers"] },
-            { text: "Праздную все события", points: ["newyear"] },
-            { text: "Сон и отдых", points: ["desktop"] },
-            { text: "Готовлю и пью кофе", points: ["coffeemachine"] },
-            { text: "Занимаюсь йогой", points: ["yogamat"] },
-            { text: "Люблю маленькие милые вещи", points: ["tiny"] },
-            { text: "Играю с огнями и светом", points: ["flashlights"] }
+            { text: "Праздничные сторис с гирляндами 🎄", points: ["newyear"] },
+            { text: "Яркие фото с огнями и вспышками ✨", points: ["flashlights"] },
+            { text: "Минимализм и уютные кадры 🐾", points: ["tiny"] },
+            { text: "Кофейные flatlay и рецепты ☕", points: ["coffeemachine"] }
         ]
     },
     {
-        question: "Какой напиток выберешь?",
+        question: "В выходной день ты предпочитаешь:",
         answers: [
-            { text: "Чай с цветами", points: ["flowers"] },
-            { text: "Шампанское на Новый год", points: ["newyear"] },
-            { text: "Воду на столе рядом с ноутом", points: ["desktop"] },
-            { text: "Капучино или латте", points: ["coffeemachine"] },
-            { text: "Травяной чай после йоги", points: ["yogamat"] },
-            { text: "Молоко", points: ["tiny"] },
-            { text: "Энергетический напиток", points: ["flashlights"] }
+            { text: "Медитация и йога 🧘‍♀️", points: ["yogamat"] },
+            { text: "Прогулка среди цветов и природы 🌸", points: ["flowers"] },
+            { text: "Сон и ленивый день 😴", points: ["desktop"] },
+            { text: "Весёлые праздники и вечеринки 🎄", points: ["newyear"] }
         ]
     },
     {
-        question: "Выбери настроение:",
+        question: "Какое настроение описывает тебя лучше всего?",
         answers: [
-            { text: "Романтичное", points: ["flowers"] },
-            { text: "Веселое праздничное", points: ["newyear"] },
-            { text: "Уютное и сонное", points: ["desktop"] },
-            { text: "Активное и бодрое", points: ["coffeemachine"] },
-            { text: "Спокойное и медитативное", points: ["yogamat"] },
-            { text: "Милое и забавное", points: ["tiny"] },
-            { text: "Энергичное и яркое", points: ["flashlights"] }
-        ]
-    },
-    {
-        question: "Твой идеальный день?",
-        answers: [
-            { text: "Прогулка в саду", points: ["flowers"] },
-            { text: "Праздники с друзьями", points: ["newyear"] },
-            { text: "Сон и чтение", points: ["desktop"] },
-            { text: "Кофейня и книги", points: ["coffeemachine"] },
-            { text: "Йога и медитация", points: ["yogamat"] },
-            { text: "Игра с маленькими питомцами", points: ["tiny"] },
-            { text: "Ночной город с огнями", points: ["flashlights"] }
+            { text: "Энергичное и яркое ✨", points: ["flashlights"] },
+            { text: "Маленькое и милое 🐾", points: ["tiny"] },
+            { text: "Кофейное и продуктивное ☕", points: ["coffeemachine"] },
+            { text: "Романтичное и цветочное 🌸", points: ["flowers"] }
         ]
     }
 ];
 
-// Контрольный вопрос
+// Контрольный вопрос при ничье
 const tieBreaker = {
-    question: "Выбери одно из этих настроений:",
+    question: "Выбери одно настроение, которое больше всего подходит тебе:",
     answers: [
-        { text: "Романтичное 🌸", points: ["flowers"] },
-        { text: "Праздничное 🎄", points: ["newyear"] },
-        { text: "Сонное 😴", points: ["desktop"] },
-        { text: "Энергичное ☕", points: ["coffeemachine"] },
-        { text: "Спокойное 🧘‍♀️", points: ["yogamat"] },
+        { text: "Энергичное и яркое ✨", points: ["flashlights"] },
         { text: "Маленькое и милое 🐾", points: ["tiny"] },
-        { text: "Яркое и вспышки ✨", points: ["flashlights"] }
+        { text: "Кофейное и продуктивное ☕", points: ["coffeemachine"] },
+        { text: "Романтичное и цветочное 🌸", points: ["flowers"] },
+        { text: "Сонное и уютное 😴", points: ["desktop"] },
+        { text: "Праздничное 🎄", points: ["newyear"] },
+        { text: "Йога и медитация 🧘‍♀️", points: ["yogamat"] }
     ]
 };
 
+// Инициализация
 let scores = {};
 let currentQuestion = 0;
 
@@ -116,7 +94,6 @@ function showQuestion() {
     if (currentQuestion < questions.length) {
         q = questions[currentQuestion];
     } else {
-        // Проверка на ничью
         const maxScore = Math.max(...Object.values(scores));
         const topCats = Object.keys(scores).filter(cat => scores[cat] === maxScore);
         if (topCats.length > 1) {
@@ -151,7 +128,7 @@ function showResult() {
 
     const maxScore = Math.max(...Object.values(scores));
     const topCats = Object.keys(scores).filter(cat => scores[cat] === maxScore);
-    const winner = topCats[0]; // Победитель
+    const winner = topCats[0];
     resultNameEl.textContent = cats[winner].name;
     resultImageEl.src = cats[winner].img;
 }
