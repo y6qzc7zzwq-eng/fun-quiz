@@ -2,25 +2,25 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Какой ты котик-пирожок?</title>
+    <title>Тест котика</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Какой ты котик-пирожок сегодня?</h1>
-        
-        <!-- Контейнер для вопросов -->
-        <div id="quiz"></div>
-        
-        <!-- Результат -->
-        <div id="result" class="hidden">
-            <h2 id="result-name"></h2>
-            <img id="result-img" src="" alt="Ваш котик">
-            <button id="restart">Пройти ещё раз</button>
-        </div>
-    </div>
+    <h1>Простой тест котика</h1>
+    <p>Нажми кнопку, чтобы увидеть котика-пирожка!</p>
+    <button id="showCat">Показать котика</button>
+    <div id="catContainer"></div>
 
-    <script src="script.js"></script>
+    <script>
+        const button = document.getElementById('showCat');
+        const container = document.getElementById('catContainer');
+
+        button.onclick = () => {
+            container.innerHTML = `
+                <h2>Романтичный пирожок 🌸</h2>
+                <img src="images/flowers.jpeg" alt="Романтичный пирожок" style="max-width:300px;">
+            `;
+        };
+    </script>
 </body>
 </html>
-
