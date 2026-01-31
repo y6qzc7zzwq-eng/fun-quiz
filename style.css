@@ -1,36 +1,104 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #f6f7fb;
-  padding: 40px;
-  text-align: center;
+// Варианты результатов
+const results = {
+    flowers: { name: "Романтичный пирожок", img: "images/flowers.jpeg", score: 0 },
+    newyear: { name: "Праздничная булочка", img: "images/newyear.jpeg", score: 0 },
+    flash: { name: "Серьезный хлебушек", img: "images/flash.jpeg", score: 0 },
+    desknap: { name: "Усталый офисный пирожок", img: "images/desknap.jpeg", score: 0 },
+    barista: { name: "Кот-бариста", img: "images/barista.jpeg", score: 0 },
+    yoga: { name: "Гибкая булочка", img: "images/yoga.jpeg", score: 0 },
+    tiny: { name: "Мини-пирожок", img: "images/tiny.jpeg", score: 0 }
+};
+
+// Вопросы
+const questions = [
+    {
+        question: "Как ты чувствуешь себя сегодня?",
+        answers: [
+            { text: "Полон энергии", scores: { barista: 1, yoga: 1 } },
+            { text: "Хочу спать", scores: { desknap: 1, tiny: 1 } },
+            { text: "Настроение романтичное", scores: { flowers: 1, newyear: 1 } }
+        ]
+    },
+    {
+        question: "Где бы хотел провести день?",
+        answers: [
+            { text: "На коврике для йоги", scores: { yoga: 1 } },
+            { text: "На работе / рядом с компом", scores: { desknap: 1 } },
+            { text: "Под елкой / с украшениями", scores: { newyear: 1 } }
+        ]
+    },
+    {
+        question: "Какой котик тебе ближе?", // контрольный вопрос
+        answers: [
+            { text: "Серьезный и яркий", scores: { flash: 1 } },
+            { text: "Сонный и милый", scores: { desknap: 1, tiny: 1 } },
+            { text: "Любопытный и романтичный", scores: { flowers: 1, barista: 1 } }
+        ]
+    }
+];
+
+let currentQuestion = 0;
+const quizDiv = document.getElementById("quiz");
+const resultDiv = document.getElementById("result");
+const resultName = document.getElementById("result-name");
+const resultImg = document.getElementById("result-img");
+const restartBtn = document.getElementById("restart");
+
+function showQuestion() {
+    quizDiv.innerHTML = "";
+    const q = questions[currentQuestion];
+    const h2 = document.createElement("h2");
+    h2.textContent = q.question;
+    quizDiv.appendChild(h2);
+
+    q.answers.forEach(answer => {
+        const btn = document.createElement("button");
+        btn.textContent = answer.text;
+        btn.onclick = () => {
+            // Добавляем очки
+            for (let key in answer.scores) {
+                results[key].score += answer.scores[key];
+            }
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        };
+        quizDiv.appendChild(btn);
+    });
 }
 
-#quiz {
-  background: white;
-  padding: 20px;
-  border-radius: 16px;
-  max-width: 420px;
-  margin: 20px auto;
+function showResult() {
+    // Находим максимальное количество очков
+    let maxScore = Math.max(...Object.values(results).map(r => r.score));
+    // Фильтруем варианты с макс очками
+    let winners = Object.values(results).filter(r => r.score === maxScore);
+    // Если несколько, используем контрольный вопрос (последний)
+    let winner;
+    if (winners.length > 1) {
+        winner = Object.values(results).reduce((acc, r) => {
+            return questions[questions.length -1].answers.some(a => a.scores[r.name.toLowerCase()]) ? r : acc;
+        }, winners[0]);
+    } else {
+        winner = winners[0];
+    }
+
+    quizDiv.classList.add("hidden");
+    resultName.textContent = winner.name;
+    resultImg.src = winner.img;
+    resultDiv.classList.remove("hidden");
 }
 
-.option {
-  display: block;
-  padding: 12px;
-  margin: 10px 0;
-  background: #eef0ff;
-  border-radius: 12px;
-  cursor: pointer;
+restartBtn.onclick = () => {
+    // Сброс очков
+    for (let key in results) results[key].score = 0;
+    currentQuestion = 0;
+    resultDiv.classList.add("hidden");
+    quizDiv.classList.remove("hidden");
+    showQuestion();
 }
 
-.option:hover {
-  background: #dfe3ff;
-}
-
-button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 14px;
-  background: #6c63ff;
-  color: white;
-  font-size: 16px;
-}
+// Старт теста
+showQuestion();
