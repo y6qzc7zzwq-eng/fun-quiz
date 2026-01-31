@@ -1,0 +1,36 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f6f7fb;
+  padding: 40px;
+  text-align: center;
+}
+
+#quiz {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  max-width: 420px;
+  margin: 20px auto;
+}
+
+.option {
+  display: block;
+  padding: 12px;
+  margin: 10px 0;
+  background: #eef0ff;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #dfe3ff;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 14px;
+  background: #6c63ff;
+  color: white;
+  font-size: 16px;
+}
