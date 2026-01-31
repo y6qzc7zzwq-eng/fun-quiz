@@ -6,21 +6,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Простой тест котика</h1>
-    <p>Нажми кнопку, чтобы увидеть котика-пирожка!</p>
-    <button id="showCat">Показать котика</button>
-    <div id="catContainer"></div>
-
-    <script>
-        const button = document.getElementById('showCat');
-        const container = document.getElementById('catContainer');
-
-        button.onclick = () => {
-            container.innerHTML = `
-                <h2>Романтичный пирожок 🌸</h2>
-                <img src="images/flowers.jpeg" alt="Романтичный пирожок" style="max-width:300px;">
-            `;
-        };
-    </script>
-</body>
-</html>
+    <div class="container">
+        <h1>Какой ты котик-пирожок сегодня?</h1>
+        <div id="quiz"></div>
+        <div id="result" class="hidden">
+            <h2 id="result-name"></h2>
+            <img id="result-img" src="" alt="Ваш котик" style="max-width:300px;">
+            <button id="restart
