@@ -9,18 +9,18 @@ const answersEl = document.getElementById('answers');
 const resultNameEl = document.getElementById('resultName');
 const resultImageEl = document.getElementById('resultImage');
 
-// Котики с путями к твоим файлам
+// Котики теста
 const cats = {
     flowers: { name: "Котик с цветами", img: "./images/desknap.jpeg" },
     newyear: { name: "Новогодний котик", img: "./images/newyear.jpeg" },
     flashlights: { name: "Котик со вспышками", img: "./images/flash.jpeg" },
     desktop: { name: "Котик на рабочем столе", img: "./images/desknap.jpeg" },
     coffeemachine: { name: "Котик-бариста", img: "./images/barista.jpeg" },
-    yogamat: { name: "Котик на коврике для йоги", img: "./images/barista.jpeg" }, // если йога отдельный файл, поменяй
+    yogamat: { name: "Котик на коврике для йоги", img: "./images/barista.jpeg" },
     tiny: { name: "Маленький котик «клопикс»", img: "./images/tiny.jpeg" }
 };
 
-// Новый набор вопросов: 4 вопроса, 4 варианта каждый
+// Вопросы: 4 вопроса по 4 варианта
 const questions = [
     {
         question: "Какой твой идеальный завтрак?",
