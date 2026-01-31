@@ -2,20 +2,23 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Какой ты котик-пирожок?</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Мини-тест котика</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        button {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Какой ты котик-пирожок сегодня?</h1>
-        <div id="quiz"></div>
-        <div id="result" class="hidden">
-            <h2 id="result-name"></h2>
-            <img id="result-img" src="" alt="Ваш котик" style="max-width:300px;">
-            <button id="restart">Пройти ещё раз</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    <h1>Какой ты котик-пирожок сегодня?</h1>
+    <div id="quiz"></div>
