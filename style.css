@@ -1,160 +1,27 @@
-/* Общие стили */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #fff9f0;
-    color: #333;
+.pixel-cat {
+  width: 80px;
+  height: 40px;
+  position: fixed;
+  bottom: 10px;
+  animation: run 6s linear infinite;
 }
 
-h1, h2, h3 {
-    text-align: center;
+/* Анимация движения слева направо */
+@keyframes run {
+  0% { transform: translateX(-150px); }
+  100% { transform: translateX(100vw); }
 }
 
-/* Центрирование стартового экрана */
-.center-screen {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* Анимация смены кадров лапок */
+@keyframes paws {
+  0%, 50% { display: inline; }
+  50.01%, 100% { display: none; }
 }
 
-/* Кнопки */
-button {
-    padding: 15px 30px;
-    font-size: 1.2em;
-    margin: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    background-color: #ffb347;
-    color: #fff;
-    transition: background 0.3s;
+/* CSS через JS переключение */
+.pixel-cat .frame {
+  animation: paws 0.5s steps(1) infinite;
 }
-
-button:hover {
-    background-color: #ff9234;
-}
-
-/* Скрытый блок */
-.hidden {
-    display: none;
-}
-
-/* Вопросы и ответы */
-#answers {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-
-#answers button {
-    width: 80%;
-    max-width: 300px;
-}
-
-/* Результат */
-#result img {
-    display: block;
-    margin: 20px auto;
-    max-width: 250px;
-    border-radius: 10px;
-}
-
-/* --- Графический бегущий котик --- */
-.running-graphic-cat {
-    position: fixed;
-    bottom: 5px;
-    left: -60px;
-    width: 50px;
-    height: 50px;
-    z-index: 9999;
-    pointer-events: none;
-    animation: run-cat 6s linear infinite;
-}
-
-.cat-body {
-    position: relative;
-    width: 50px;
-    height: 50px;
-}
-
-/* Уши */
-.cat-ear {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: #333;
-    top: 0;
-    border-radius: 50% 50% 0 0;
-}
-.cat-ear.left { left: 5px; transform: rotate(-20deg); }
-.cat-ear.right { right: 5px; transform: rotate(20deg); }
-
-/* Лицо */
-.cat-face {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    width: 34px;
-    height: 34px;
-    background: #333;
-    border-radius: 50%;
-}
-
-/* Глаза */
-.cat-eye {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #fff;
-    border-radius: 50%;
-    top: 10px;
-}
-.cat-eye.left { left: 7px; }
-.cat-eye.right { right: 7px; }
-
-/* Рот */
-.cat-mouth {
-    position: absolute;
-    width: 10px;
-    height: 2px;
-    background: #fff;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 1px;
-}
-
-/* Хвост */
-.cat-tail {
-    position: absolute;
-    width: 6px;
-    height: 20px;
-    background: #333;
-    bottom: 0;
-    right: -5px;
-    border-radius: 3px;
-    transform: rotate(30deg);
-}
-
-/* Анимация: движение слева направо */
-@keyframes run-cat {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(110vw); }
-}
-
-/* Адаптив для маленьких экранов */
-@media (max-width: 400px) {
-    button {
-        font-size: 1em;
-        padding: 12px 25px;
-    }
-    .running-graphic-cat {
-        width: 40px;
-        height: 40px;
-    }
-    .cat-body { width: 40px; height: 40px; }
+.pixel-cat .frame2 {
+  animation-delay: 0.25s;
 }
