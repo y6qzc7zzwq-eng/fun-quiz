@@ -1,139 +1,131 @@
-// Элементы страницы
 const startBtn = document.getElementById('startBtn');
 const restartBtn = document.getElementById('restartBtn');
-const welcomeDiv = document.getElementById('welcome');
-const quizDiv = document.getElementById('quiz');
-const resultDiv = document.getElementById('result');
-const questionEl = document.getElementById('question');
-const answersEl = document.getElementById('answers');
-const resultNameEl = document.getElementById('resultName');
-const resultImageEl = document.getElementById('resultImage');
+const startScreen = document.querySelector('.start-screen');
+const testWrapper = document.querySelector('.test-wrapper');
+const resultScreen = document.querySelector('.result-screen');
+const questionContainer = document.getElementById('question-container');
+const resultTitle = document.getElementById('result-title');
+const resultImage = document.getElementById('result-image');
 
-// Котики теста
-const cats = {
-    flowers: { name: "Котик с цветами", img: "./images/desknap.jpeg" },
-    newyear: { name: "Новогодний котик", img: "./images/newyear.jpeg" },
-    flashlights: { name: "Котик со вспышками", img: "./images/flash.jpeg" },
-    desktop: { name: "Котик на рабочем столе", img: "./images/desknap.jpeg" },
-    coffeemachine: { name: "Котик-бариста", img: "./images/barista.jpeg" },
-    yogamat: { name: "Котик на коврике для йоги", img: "./images/barista.jpeg" },
-    tiny: { name: "Маленький котик «клопикс»", img: "./images/tiny.jpeg" }
+let currentQuestion = 0;
+let scores = {
+  flowers: 0,
+  newyear: 0,
+  flash: 0,
+  desknap: 0,
+  barista: 0,
+  yogamat: 0,
+  tiny: 0
 };
 
-// Вопросы: 4 вопроса по 4 варианта
+// Вопросы
 const questions = [
-    {
-        question: "Какой твой идеальный завтрак?",
-        answers: [
-            { text: "Латте и круассан ☕🥐", points: ["coffeemachine"] },
-            { text: "Зелёный смузи и йога 🧘‍♀️", points: ["yogamat"] },
-            { text: "Солнечные цветы на подоконнике 🌸", points: ["flowers"] },
-            { text: "Ничего, хочу ещё поспать 😴", points: ["desktop"] }
-        ]
-    },
-    {
-        question: "Твой любимый стиль в соцсетях?",
-        answers: [
-            { text: "Праздничные сторис с гирляндами 🎄", points: ["newyear"] },
-            { text: "Яркие фото с огнями и вспышками ✨", points: ["flashlights"] },
-            { text: "Минимализм и уютные кадры 🐾", points: ["tiny"] },
-            { text: "Кофейные flatlay и рецепты ☕", points: ["coffeemachine"] }
-        ]
-    },
-    {
-        question: "В выходной день ты предпочитаешь:",
-        answers: [
-            { text: "Медитация и йога 🧘‍♀️", points: ["yogamat"] },
-            { text: "Прогулка среди цветов и природы 🌸", points: ["flowers"] },
-            { text: "Сон и ленивый день 😴", points: ["desktop"] },
-            { text: "Весёлые праздники и вечеринки 🎄", points: ["newyear"] }
-        ]
-    },
-    {
-        question: "Какое настроение описывает тебя лучше всего?",
-        answers: [
-            { text: "Энергичное и яркое ✨", points: ["flashlights"] },
-            { text: "Маленькое и милое 🐾", points: ["tiny"] },
-            { text: "Кофейное и продуктивное ☕", points: ["coffeemachine"] },
-            { text: "Романтичное и цветочное 🌸", points: ["flowers"] }
-        ]
-    }
+  {
+    text: "Что тебе нравится делать утром?",
+    answers: [
+      {text: "Собирать цветы", cats: ["flowers"]},
+      {text: "Пить кофе", cats: ["barista"]},
+      {text: "Медитировать", cats: ["yogamat"]}
+    ]
+  },
+  {
+    text: "Как отмечаешь праздники?",
+    answers: [
+      {text: "Весело с друзьями", cats: ["newyear"]},
+      {text: "Спокойно дома", cats: ["desknap"]},
+      {text: "Маленькие радости", cats: ["tiny"]}
+    ]
+  },
+  {
+    text: "Что тебя вдохновляет?",
+    answers: [
+      {text: "Фары в ночи", cats: ["flash"]},
+      {text: "Природа и цветы", cats: ["flowers"]},
+      {text: "Завтрак с кофе", cats: ["barista"]}
+    ]
+  },
+  {
+    text: "Любимый способ провести день?",
+    answers: [
+      {text: "Сон и отдых", cats: ["desknap"]},
+      {text: "Йога и движение", cats: ["yogamat"]},
+      {text: "Маленькие радости", cats: ["tiny"]}
+    ]
+  },
+  {
+    text: "Что приносит радость?",
+    answers: [
+      {text: "Новый год и праздники", cats: ["newyear"]},
+      {text: "Цветы и прогулки", cats: ["flowers"]},
+      {text: "Яркие вспышки", cats: ["flash"]}
+    ]
+  }
 ];
 
-// Контрольный вопрос при ничье
-const tieBreaker = {
-    question: "Выбери одно настроение, которое больше всего подходит тебе:",
-    answers: [
-        { text: "Энергичное и яркое ✨", points: ["flashlights"] },
-        { text: "Маленькое и милое 🐾", points: ["tiny"] },
-        { text: "Кофейное и продуктивное ☕", points: ["coffeemachine"] },
-        { text: "Романтичное и цветочное 🌸", points: ["flowers"] },
-        { text: "Сонное и уютное 😴", points: ["desktop"] },
-        { text: "Праздничное 🎄", points: ["newyear"] },
-        { text: "Йога и медитация 🧘‍♀️", points: ["yogamat"] }
-    ]
+// Результаты
+const results = {
+  flowers: {title: "Котик с цветами", image: "images/flowers.jpeg"},
+  newyear: {title: "Новогодний котик", image: "images/newyear.jpeg"},
+  flash: {title: "Котик с фарами", image: "images/flash.jpeg"},
+  desknap: {title: "Котик спит на столе", image: "images/desknap.jpeg"},
+  barista: {title: "Котик-бариста", image: "images/barista.jpeg"},
+  yogamat: {title: "Котик на коврике для йоги", image: "images/yogamat.jpeg"},
+  tiny: {title: "Маленький котик", image: "images/tiny.jpeg"}
 };
 
-// Инициализация
-let scores = {};
-let currentQuestion = 0;
+startBtn.addEventListener('click', startTest);
+restartBtn.addEventListener('click', restartTest);
 
-startBtn.addEventListener('click', startQuiz);
-restartBtn.addEventListener('click', restartQuiz);
-
-function startQuiz() {
-    welcomeDiv.classList.add('hidden');
-    quizDiv.classList.remove('hidden');
-    currentQuestion = 0;
-    scores = {};
-    showQuestion();
+function startTest() {
+  startScreen.classList.add('hidden');
+  testWrapper.classList.remove('hidden');
+  currentQuestion = 0;
+  scores = {flowers:0,newyear:0,flash:0,desknap:0,barista:0,yogamat:0,tiny:0};
+  showQuestion();
 }
 
 function showQuestion() {
-    let q;
-    if (currentQuestion < questions.length) {
-        q = questions[currentQuestion];
-    } else {
-        const maxScore = Math.max(...Object.values(scores));
-        const topCats = Object.keys(scores).filter(cat => scores[cat] === maxScore);
-        if (topCats.length > 1) {
-            q = tieBreaker;
-        } else {
-            showResult();
-            return;
-        }
-    }
-
-    questionEl.textContent = q.question;
-    answersEl.innerHTML = '';
-    q.answers.forEach(answer => {
-        const btn = document.createElement('button');
-        btn.textContent = answer.text;
-        btn.addEventListener('click', () => selectAnswer(answer.points));
-        answersEl.appendChild(btn);
+  const q = questions[currentQuestion];
+  questionContainer.innerHTML = `<h2>${q.text}</h2>` +
+    q.answers.map((a, i) => `<button data-index="${i}">${a.text}</button>`).join('');
+  
+  questionContainer.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = q.answers[btn.dataset.index];
+      answer.cats.forEach(cat => scores[cat]++);
+      currentQuestion++;
+      if(currentQuestion < questions.length){
+        showQuestion();
+      } else {
+        showResult();
+      }
     });
-}
-
-function selectAnswer(points) {
-    points.forEach(cat => {
-        scores[cat] = (scores[cat] || 0) + 1;
-    });
-    currentQuestion++;
-    showQuestion();
+  });
 }
 
 function showResult() {
-    quizDiv.classList.add('hidden');
-    resultDiv.classList.remove('hidden');
+  testWrapper.classList.add('hidden');
 
-    const maxScore = Math.max(...Object.values(scores));
-    const topCats = Object.keys(scores).filter(cat => scores[cat] === maxScore);
-    const winner = topCats[0];
-    resultNameEl.textContent = cats[winner].name;
-    resultImageEl.src = cats[winner].img;
+  let maxScore = Math.max(...Object.values(scores));
+  let topCats = Object.keys(scores).filter(c => scores[c] === maxScore);
+  let winner = topCats[0]; // можно добавить контрольный вопрос
+
+  resultTitle.textContent = results[winner].title;
+  resultImage.src = results[winner].image;
+  resultScreen.classList.remove('hidden');
 }
 
-function restartQuiz() {
-    resultDiv.classList.add('hidden');
-    welcomeDiv.classList.remove('hidden');
+function restartTest() {
+  resultScreen.classList.add('hidden');
+  startScreen.classList.remove('hidden');
 }
+
+/* Анимация лапок для бегущего кота */
+const frames = document.querySelectorAll('.pixel-cat .frame');
+let toggle = true;
+setInterval(() => {
+  frames.forEach(f => f.style.display = 'none');
+  if(toggle) frames[0].style.display = 'inline';
+  else frames[1].style.display = 'inline';
+  toggle = !toggle;
+}, 250);
