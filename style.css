@@ -1,27 +1,101 @@
+/* Общие стили */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Стартовый экран */
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.start-screen button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* Вопросы */
+.test-wrapper {
+  padding: 20px;
+}
+
+#question-container button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* Результат */
+.result-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.result-screen img {
+  max-width: 80%;
+  margin: 20px 0;
+}
+
+.result-screen button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Бегущий кот */
+.cat-wrapper {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  pointer-events: none;
+}
+
 .pixel-cat {
   width: 80px;
   height: 40px;
-  position: fixed;
-  bottom: 10px;
+  position: relative;
   animation: run 6s linear infinite;
 }
 
-/* Анимация движения слева направо */
+/* Анимация слева направо */
 @keyframes run {
   0% { transform: translateX(-150px); }
   100% { transform: translateX(100vw); }
 }
 
-/* Анимация смены кадров лапок */
-@keyframes paws {
-  0%, 50% { display: inline; }
-  50.01%, 100% { display: none; }
-}
-
-/* CSS через JS переключение */
-.pixel-cat .frame {
-  animation: paws 0.5s steps(1) infinite;
-}
-.pixel-cat .frame2 {
-  animation-delay: 0.25s;
+/* Адаптация под мобилки */
+@media (max-width: 600px) {
+  .start-screen button {
+    font-size: 1.2rem;
+    padding: 12px 20px;
+  }
+  #question-container button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+  .pixel-cat {
+    width: 60px;
+    height: 30px;
+  }
 }
