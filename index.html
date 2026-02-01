@@ -1,31 +1,39 @@
-<div class="cat-wrapper">
-  <svg class="pixel-cat" viewBox="0 0 30 15" xmlns="http://www.w3.org/2000/svg">
-    <!-- Кадр 1 -->
-    <g class="frame frame1">
-      <rect x="0" y="6" width="2" height="1" fill="#555"/> <!-- хвост -->
-      <rect x="2" y="6" width="2" height="1" fill="#555"/>
-      <rect x="4" y="5" width="12" height="5" fill="#555"/> <!-- туловище -->
-      <rect x="4" y="4" width="12" height="1" fill="#555"/> <!-- спина -->
-      <rect x="5" y="10" width="2" height="1" fill="#555"/> <!-- лапки -->
-      <rect x="9" y="10" width="2" height="1" fill="#555"/>
-      <rect x="13" y="10" width="2" height="1" fill="#555"/>
-      <rect x="16" y="4" width="3" height="3" fill="#555"/> <!-- голова -->
-      <rect x="15" y="3" width="1" height="1" fill="#555"/> <!-- уши -->
-      <rect x="18" y="3" width="1" height="1" fill="#555"/>
-    </g>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест с котиком 🐾</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <!-- Кадр 2 (лапки смещены) -->
-    <g class="frame frame2" style="display:none;">
-      <rect x="0" y="6" width="2" height="1" fill="#555"/>
-      <rect x="2" y="6" width="2" height="1" fill="#555"/>
-      <rect x="4" y="5" width="12" height="5" fill="#555"/>
-      <rect x="4" y="4" width="12" height="1" fill="#555"/>
-      <rect x="5" y="9" width="2" height="1" fill="#555"/> <!-- лапки подняты -->
-      <rect x="9" y="11" width="2" height="1" fill="#555"/>
-      <rect x="13" y="9" width="2" height="1" fill="#555"/>
-      <rect x="16" y="4" width="3" height="3" fill="#555"/>
-      <rect x="15" y="3" width="1" height="1" fill="#555"/>
-      <rect x="18" y="3" width="1" height="1" fill="#555"/>
-    </g>
-  </svg>
-</div>
+  <div class="start-screen">
+    <h1>Привет! 🐾 Готов пройти тест?</h1>
+    <button id="startBtn">Начать тест 🐾</button>
+  </div>
+
+  <div class="test-wrapper hidden">
+    <div id="question-container"></div>
+  </div>
+
+  <div class="result-screen hidden">
+    <h2 id="result-title"></h2>
+    <img id="result-image" alt="Котик">
+    <button id="restartBtn">Пройти ещё раз 🐾</button>
+  </div>
+
+  <!-- Бегущий кот внизу -->
+  <div class="cat-wrapper">
+    <svg class="pixel-cat" viewBox="0 0 30 15" xmlns="http://www.w3.org/2000/svg">
+      <!-- Кадр 1 -->
+      <g class="frame frame1">
+        <rect x="0" y="6" width="2" height="1" fill="#555"/>
+        <rect x="2" y="6" width="2" height="1" fill="#555"/>
+        <rect x="4" y="5" width="12" height="5" fill="#555"/>
+        <rect x="4" y="4" width="12" height="1" fill="#555"/>
+        <rect x="5" y="10" width="2" height="1" fill="#555"/>
+        <rect x="9" y="10" width="2" height="1" fill="#555"/>
+        <rect x="13" y="10" width="2" height="1" fill="#555"/>
+        <rect x="16" y="4" width="3" height="3" fill="#555"/>
+        <re
