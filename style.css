@@ -28,16 +28,22 @@ body {
   border-radius: 10px;
 }
 
-/* Вопросы */
+/* Тестовый экран */
 .test-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* центр по вертикали */
+  align-items: center;     /* центр по горизонтали */
+  height: 100vh;           /* занимает весь экран */
   padding: 20px;
+  text-align: center;
 }
 
 #question-container button {
   display: block;
   margin: 10px 0;
-  padding: 10px;
-  font-size: 1rem;
+  padding: 12px 20px;
+  font-size: 1.2rem;
   cursor: pointer;
   border-radius: 8px;
 }
